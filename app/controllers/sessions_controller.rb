@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 
   	if @user = User.find_by_email(params[:session][:email])
   		if @user.authenticate(params[:session][:password])
+  			session[:id] = @user.id
   			redirect_to "/users/#{@user.id}"
   		else
   			flash[:errors] << "Invalid password"
@@ -16,4 +17,10 @@ class SessionsController < ApplicationController
   		redirect_to '/users/new'
   	end
   end
+
+  def destroy
+  	session.clear
+  	redirect_to '/sessions/new'
+  end
+
 end
