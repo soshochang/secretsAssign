@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   	if @user = User.find_by_email(params[:session][:email])
   		if @user.authenticate(params[:session][:password])
-  			session[:id] = @user.id
+  			session[:user_id] = @user.id
   			redirect_to "/users/#{@user.id}"
   		else
   			flash[:errors] << "Invalid password"
