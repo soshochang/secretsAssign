@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: secretsAssign_production
-  username: secretsAssign
+  username: ubuntu
   password: <%= ENV['SECRETSASSIGN_DATABASE_PASSWORD'] %>

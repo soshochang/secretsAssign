@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
   before_action :require_correct_user, only: [:show, :edit, :update, :destroy]
-
   
   def index
     @users = User.all
@@ -12,6 +11,7 @@ class UsersController < ApplicationController
 
   def create
     if @user = User.create(user_params)
+      session[:user_id] = @user.id
       redirect_to "/users/#{@user.id}"
     else
       redirect_to "/users/new"
@@ -28,7 +28,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
+    if @user.update(user_params)
+      redirect_to "/users/#{@user.id}"
+    end
   end
 
   def destroy

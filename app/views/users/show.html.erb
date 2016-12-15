@@ -5,14 +5,12 @@
 <%= "Name: #{@user.name}" %><br>
 <%= "Email: #{@user.email}" %>
 
-
+<h4> Secrets </h4>
 <form action="/secrets" method="post">
 	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
 	<input type = "text" name ="secret[content]" placeholder="name">
 	<input type="submit" value="create">
 </form>	
-
-<h4> Secrets </h4>
 <% @user.secrets.each do |s| %>
 	<%= "Content: #{s.content}" %><br>
 	<%= "ID: #{s.id}" %><br>
